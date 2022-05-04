@@ -94,7 +94,7 @@ class UserController extends Controller
             $file = $request->file('avatar');
             $fileExtension = $file->getClientOriginalExtension();
             $fileName = time().".".$fileExtension;
-            $file->move(public_path('img/avaUser'), $fileName);
+            $file->move( 'img/avaUser', $fileName);
         }
         $data = [
             'first_name'=>$request->first_name,

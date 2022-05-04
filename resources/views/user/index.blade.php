@@ -112,7 +112,7 @@
                                 if (!data) {
                                     return '';
                                 }
-                                return `<img src="{{'img/avaUser'}}/${data}">`;
+                                return `<img src="{{asset('img/avaUser')}}/${data}">`;
                             }
                         },
                         {

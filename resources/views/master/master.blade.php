@@ -6,6 +6,7 @@
     <title>@yield('title')</title>
     @yield('css')
     @stack('css')
+   @stack('csslogin')
 </head>
 
 <body>

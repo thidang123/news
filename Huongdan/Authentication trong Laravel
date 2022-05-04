@@ -1,0 +1,18 @@
+Authentication trong Laravel
+  Ung dung mo phong quan ly thư viện
+Phân tích chức năng
+-Frontend
+     -Landing page => Hiển thị danh sách quán sách => tất cả người
+    dùng đều có thể xem được
+                                                   
+         -auth/index => Public
+  Admin
+      Quản lý danh mục => Tài login mới xem được
+         -Danh sách => auth/category/index
+          View thêm => auth/category/insert
+     -Quản lý sách => chỉ admin hay thủ thư mới được xem
+         -Danh sách => auth/book/index
+         -View thêm => auth/book/insert
+     -Quản mượn sách => chỉ admin hay thủ thư mới được xem
+          Danh sách => auth/order/index
+          -View thêm => auth/order/insert

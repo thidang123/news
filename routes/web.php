@@ -3,7 +3,8 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserImageController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-	return view('index');
-});
+Route::get('/', [AdminController::class, "loginAdmin"]);
+
+
 Route::group(["prefix" => '/','as'=>'categories.'], function () {
 	Route::get('/contact', [SiteController::class, "contact"]);
 	Route::get('/home', [SiteController::class, "home"]);
@@ -51,6 +52,8 @@ Route::group(['prefix'=>'users','as'=>'user.'],function(){
 //For showing an image
     Route::get('viewimg',[UserController::class,'viewImage'])->name('viewimg');
 });
+Route::get('login',[LoginController::class,'login'])->name('login');
+
 
 
 

@@ -35,10 +35,10 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="" id="accountDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài Khoản</a>
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/users">Trang Admin</a>
-                                    <a class="dropdown-item" href="/user/login">Đăng Nhập</a>
+                                    <a class="dropdown-item" href="/users">Admin</a>
+                                    <a class="dropdown-item" href="/login">Login</a>
                                 </div>
                             </li>
                         </ul>
