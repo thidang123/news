@@ -26,7 +26,7 @@
                                     <input style="font-size: 18px;"type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Insert password"/>
                                 </div>
 
-                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+                                <p style="text-align: right;" class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
