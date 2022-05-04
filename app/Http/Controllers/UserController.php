@@ -87,13 +87,24 @@ class UserController extends Controller
              $data['avatar']= $filename;
          }
          $data->save();*/
+        $data = new User();
 
 
-
-        User::create($request->validated());
-
-
-
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileName = time().".".$fileExtension;
+            $file->move(public_path('img/avaUser'), $fileName);
+        }
+        $data = [
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'user_name'=>$request->user_name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'avatar'=>$fileName
+            ];
+        User::create($data);
 
         return redirect()->route('user.index');
     }

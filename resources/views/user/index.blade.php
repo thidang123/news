@@ -112,7 +112,7 @@
                                 if (!data) {
                                     return '';
                                 }
-                                return `<img src="{{public_path()}}/${data}">`;
+                                return `<img src="{{'img/avaUser'}}/${data}">`;
                             }
                         },
                         {
