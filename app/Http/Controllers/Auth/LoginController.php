@@ -4,42 +4,42 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use http\Client\Curl\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function getLogin()
     {
-        $this->middleware('guest')->except('logout');
+        return view('auth.login');
     }
     public function login(Request $request)
     {
-        return view('auth.login');
+
+        if(Auth::attempt(['user_name'=> $request->user_name,'password'=>$request->password]))
+        {
+            return redirect('/users');
+
+        }
+        else{
+            return redirect()->back()->withErrors("Nhap lai di");
+        }
+
+
+    /*     $users = DB::table('users')->where('userName', $loginRequest->userName)->where('password', $loginRequest->password)
+         ->get()->all();
+         if(count($users) > 0){
+             return redirect('admin');
+         }else{
+             return redirect('login');
+         }*/
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('login');
     }
 }

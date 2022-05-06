@@ -39,6 +39,7 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/users">Admin</a>
                                     <a class="dropdown-item" href="/login">Login</a>
+                                    <a class="dropdown-item" href="/logout">Logout</a>
                                 </div>
                             </li>
                         </ul>

@@ -15,22 +15,24 @@ class UserController extends Controller
 {
     public function index()
     {
-        /*        $search = $request->get('q');
-                $data = User::query()
-                    ->where('last_name', 'like', '%'.$search.'%')
-                    ->orWhere('first_name', 'like', '%'.$search.'%')
-                    ->orWhere('user_name', 'like', '%'.$search.'%')
-                    ->orWhere('email', 'like', '%'.$search.'%')
-                    ->paginate(5);
-                $data =
-                $data->appends(['q' => $search]);
-                //$data = User::all();
+//               $search = $request->get('q');
+//                $data = User::query()
+//                    ->where('last_name', 'like', '%'.$search.'%')
+//                    ->orWhere('first_name', 'like', '%'.$search.'%')
+//                    ->orWhere('user_name', 'like', '%'.$search.'%')
+//                    ->orWhere('email', 'like', '%'.$search.'%')
+//                    ->paginate(5);
+//                $data =
+//                $data->appends(['q' => $search]);
+                $data = User::paginate(5);
                 return view('user.index', [
                     'data' => $data,
-                ]);*/
-        return view('user.index');
+                ]);
+//        return view('user.index');
     }
-
+    public function indexx(){
+        return view('user.indexx');
+    }
     public function api()
     {
         return DataTables::of(User::query())
@@ -101,7 +103,7 @@ class UserController extends Controller
             'last_name'=>$request->last_name,
             'user_name'=>$request->user_name,
             'email'=>$request->email,
-            'password'=>$request->password,
+            'password'=>bcrypt($request->password),
             'avatar'=>$fileName
             ];
         User::create($data);
@@ -136,9 +138,10 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function destroy(DestroyRequest $request, $user)
+    public function destroy($id)
     {
-        User::destroy($user);
+
+        $user = User::destroy($id);
         return redirect()->route('user.index');
     }
 

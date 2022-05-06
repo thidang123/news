@@ -4,6 +4,10 @@
         <link rel="stylesheet" type="text/css"
               href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/date-1.1.2/fc-4.0.2/fh-3.2.2/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.2/sl-1.3.4/datatables.min.css"/>
     @endpush
+    <h3>
+        Admin
+        <small class="text-muted">Danh sách người dùng</small>
+    </h3>
     <div class="row d-flex justify-content-center text-center">
         <a href="{{route('user.create')}}" type="button"
            class="btn btn-primary" style="float: right">
@@ -37,7 +41,7 @@
                     <th scope="col">Delete</th>
                 </tr>
                 </thead>
-                <tbody>{{--
+                <tbody>
                 @foreach($data as $each)
                     <tr>
                         <th scope="row">
@@ -56,6 +60,9 @@
                             {{$each->email}}
                         </td>
                         <td>
+                        <img width="100px" height="100 px" src="img/avaUser/{{$each->avatar}}" alt="">
+                        </td>
+                        <td>
                             {{date("F jS, Y", strtotime($each->created_at))}}
                         </td>
                         <td>
@@ -64,21 +71,22 @@
                             </a>
                         </td>
                         <td>
-                            <form action="{{route('user.destroy', $each)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger">Delete</button>
-                            </form>
+                            <a href="{{route('user.destroy',$each)}}">del</a>
+{{--                            <form action="{{route('user.destroy', $each)}}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                @method('DELETE')--}}
+{{--                                <button class="btn btn-danger">Delete</button>--}}
+{{--                            </form>--}}
                         </td>
                     </tr>
-                @endforeach--}}
+                @endforeach
                 </tbody>
             </table>
-            {{--  <nav>
+             <nav>
                   <ul class="pagination pagination-rounded mb-0">
                       {{$data->links()}}
                   </ul>
-              </nav>--}}
+              </nav>
         </div>
     </div>
     @push('js')
@@ -88,7 +96,7 @@
                 src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
         <script type="text/javascript"
                 src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/date-1.1.2/fc-4.0.2/fh-3.2.2/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.2/sl-1.3.4/datatables.min.js"></script>
-        <script>
+        {{--<script>
             $(function () {
                 $('#table-index').DataTable({
                     dom: 'Blfrtip',
@@ -135,22 +143,20 @@
                         {
                             data: 'destroy',
                             targets: 8,
+                            method:'get',
                             name: 'destroy',
                             orderable: false,
                             searchable: false,
                             render: function (data, type, row, meta) {
-                                return `<form action="${data}"
-                                method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="delete-btn btn btn-danger">Delete</button>
-                            </form>`
+                                return `<a class="btn btn-outline-danger" href="${data}">
+                                Del
+                            </a>`
                             }
                         },
 
                     ]
                 });
             });
-        </script>
+        </script>--}}
     @endpush
 @endsection

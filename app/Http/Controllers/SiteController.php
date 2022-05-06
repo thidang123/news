@@ -15,7 +15,7 @@ class SiteController extends Controller
         return view('contact');
     }
     public function home(){
-        return view('home');
+        return view('index');
     }
     public function regular(){
         return view('regular');
@@ -42,7 +42,6 @@ public  function  register(){
 //   $user = User::create($datainsert);
 //    return $user;
     //controller register bắt dữ liệu từ route rồi trả về dữ liệu
-
 
 
 /*    $username = $request->input('username');

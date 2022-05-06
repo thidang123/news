@@ -11,6 +11,7 @@
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Post Describe</th>
+            <th scope="col">Post Images</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                 <td>{{$post->post_title}}</td>
                 <td>{{$post->post_author}}</td>
                 <td style="height: 100px">{{$post->post_desc}}</td>
+                <td><img width="100px" height="100 px" src="img/posts/{{$post->post_image_path}}" alt=""></td>
             </tr>
         @endforeach
         </tbody>
@@ -63,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <label for="post_image_path">Post Image</label>
-                            <input type="file" multiple name="image_path[]">
+                            <input type="file" name="post_image_path">
                         </div>
                         <textarea name="content" class="form-control tinymce_editor_init"></textarea>
                         <button class="btn btn-primary">Save changes</button>
