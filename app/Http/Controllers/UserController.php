@@ -24,15 +24,18 @@ class UserController extends Controller
 //                    ->paginate(5);
 //                $data =
 //                $data->appends(['q' => $search]);
-                $data = User::paginate(5);
-                return view('user.index', [
-                    'data' => $data,
-                ]);
+        $data = User::paginate(5);
+        return view('user.index', [
+            'data' => $data,
+        ]);
 //        return view('user.index');
     }
-    public function indexx(){
+
+    public function indexx()
+    {
         return view('user.indexx');
     }
+
     public function api()
     {
         return DataTables::of(User::query())
@@ -95,17 +98,17 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $fileExtension = $file->getClientOriginalExtension();
-            $fileName = time().".".$fileExtension;
-            $file->move( 'img/avaUser', $fileName);
+            $fileName = time() . "." . $fileExtension;
+            $file->move('img/avaUser', $fileName);
         }
         $data = [
-            'first_name'=>$request->first_name,
-            'last_name'=>$request->last_name,
-            'user_name'=>$request->user_name,
-            'email'=>$request->email,
-            'password'=>bcrypt($request->password),
-            'avatar'=>$fileName
-            ];
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'user_name' => $request->user_name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'avatar' => isset($request->avatar) ? $fileName : 'noimage.png'
+        ];
         User::create($data);
 
         return redirect()->route('user.index');
@@ -125,16 +128,25 @@ class UserController extends Controller
     }
 
 
-    public function update(UpdateRequest $request, User $user)
+    public function update(UpdateRequest $request, $id)
     {
-        /*        User::where('id',$user->id)->update(
-                    $request->except([
-                        '_token',
-                        '_method',
-                    ])
-                );*/
-        $user->fill($request->validated());
-        $user->save();
+        $user = User::find($id);
+        $data = [
+            'first_name' => isset($request->first_name)?$request->first_name:$user->first_name,
+            'last_name' => isset($request->last_name)?$request->last_name:$user->last_name,
+            'user_name' => isset($request->user_name)?$request->user_name:$user->user_name,
+            'email' => isset($request->email)?$request->email:$user->email,
+            'password' => bcrypt($request->password),
+
+        ];
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileName = time() . "." . $fileExtension;
+            $file->move('img/avaUser', $fileName);
+            $data=['avatar'=>$fileName];
+        }
+        $user->update($data);
         return redirect()->route('user.index');
     }
 
@@ -146,20 +158,20 @@ class UserController extends Controller
     }
 
     //Store image
-   /* public function storeImage(Request $request)
-    {
-        $data = new Userimage();
+    /* public function storeImage(Request $request)
+     {
+         $data = new Userimage();
 
-        if ($request->file('image')) {
-            $file = $request->file('image');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('public/img/avaUser'), $filename);
-            $data['image'] = $filename;
-        }
-        $data->save();
-        return redirect()->route('userimages.view');
+         if ($request->file('image')) {
+             $file = $request->file('image');
+             $filename = date('YmdHi') . $file->getClientOriginalName();
+             $file->move(public_path('public/img/avaUser'), $filename);
+             $data['image'] = $filename;
+         }
+         $data->save();
+         return redirect()->route('userimages.view');
 
-    }*/
+     }*/
 
     //View image
     public function viewImage()

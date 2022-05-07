@@ -5,7 +5,7 @@
 
     {{--               Begin Form                                             --}}
     <div>
-        <form action="{{route('user.update',$each)}}" method="post">
+        <form action="{{route('user.update',$each)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
             <div>
@@ -30,6 +30,10 @@
                     <label for="email">Email</label>
                     <input value="{{$each->email}}" type="email" class="form-control" name="email" id="email"
                            placeholder="Email">
+                </div>
+                <div class="image">
+                    <label>Edit image</label>
+                    <input type="file" class="form-control" name="avatar">
                 </div>
                 <button style="float:right" class="btn btn-primary">Update</button>
                 <input style="float:right" type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">

@@ -60,7 +60,7 @@
                             {{$each->email}}
                         </td>
                         <td>
-                        <img width="100px" height="100 px" src="img/avaUser/{{$each->avatar}}" alt="">
+                        <img width="100px" height="100 px" src="img/avaUser/{{$each->avatar}}">
                         </td>
                         <td>
                             {{date("F jS, Y", strtotime($each->created_at))}}
@@ -71,7 +71,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{route('user.destroy',$each)}}">del</a>
+                            <a class="btn btn-danger" href="{{route('user.destroy',$each)}}">Delete</a>
 {{--                            <form action="{{route('user.destroy', $each)}}" method="post">--}}
 {{--                                @csrf--}}
 {{--                                @method('DELETE')--}}

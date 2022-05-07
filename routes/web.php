@@ -5,6 +5,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -22,6 +23,7 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/login',[LoginController::class,'getLogin'])->middleware('checkadmin')->name('getlogin');
 Route::post('/login',[LoginController::class,'login'])->middleware('checkadmin')->name('login');
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+Route::get('/register',[RegisterController::class,'register'])->name('register');
 
     Route::group(['prefix' => 'users', 'as' => 'user.','middleware'=>'checklogin'], function () {
         Route::get('', [UserController::class, 'index'])->name('index');
@@ -37,6 +39,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
     Route::group(["prefix" => '/', 'as' => 'categories.'], function () {
         Route::get('contact', [SiteController::class, "contact"]);
+        Route::get('', [SiteController::class, "home"]);
         Route::get('home', [SiteController::class, "home"]);
         Route::get('regular', [SiteController::class, "regular"]);
         Route::get('blog', [SiteController::class, "blog"]);
@@ -58,9 +61,9 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
         Route::get('viewimg', [UserController::class, 'viewImage'])->name('viewimg');
     });
 
-/*Route::get('/auth/redirect/{provider}',function ($provider){
+Route::get('/auth/redirect/{provider}',function ($provider){
     return Socialite::driver($provider)->redirect();
-});*/
+});
 
 
 
