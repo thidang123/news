@@ -7,6 +7,7 @@
     @yield('css')
     @stack('css')
    @stack('csslogin')
+    @stack('csspost')
 </head>
 
 <body>
@@ -48,6 +49,7 @@
 @yield('script')
 @yield('js')
 @stack('js')
+@stack('jspost')
 </body>
 
 </html>

@@ -12,6 +12,7 @@ class Post extends Model
         'post_author',
         'post_title',
         'post_desc',
-        'post_id'
+        'post_id',
+        'post_image_path'
     ];
 }

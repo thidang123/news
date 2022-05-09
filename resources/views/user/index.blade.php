@@ -60,7 +60,7 @@
                             {{$each->email}}
                         </td>
                         <td>
-                        <img width="100px" height="100 px" src="img/avaUser/{{$each->avatar}}">
+                            <img width="100px" height="100 px" src="img/avaUser/{{$each->avatar}}">
                         </td>
                         <td>
                             {{date("F jS, Y", strtotime($each->created_at))}}
@@ -72,21 +72,21 @@
                         </td>
                         <td>
                             <a class="btn btn-danger" href="{{route('user.destroy',$each)}}">Delete</a>
-{{--                            <form action="{{route('user.destroy', $each)}}" method="post">--}}
-{{--                                @csrf--}}
-{{--                                @method('DELETE')--}}
-{{--                                <button class="btn btn-danger">Delete</button>--}}
-{{--                            </form>--}}
+                            {{--                            <form action="{{route('user.destroy', $each)}}" method="post">--}}
+                            {{--                                @csrf--}}
+                            {{--                                @method('DELETE')--}}
+                            {{--                                <button class="btn btn-danger">Delete</button>--}}
+                            {{--                            </form>--}}
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-             <nav>
-                  <ul class="pagination pagination-rounded mb-0">
-                      {{$data->links()}}
-                  </ul>
-              </nav>
+            <nav>
+                <ul class="pagination pagination-rounded mb-0">
+                    {{$data->links()}}
+                </ul>
+            </nav>
         </div>
     </div>
     @push('js')
@@ -96,6 +96,8 @@
                 src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
         <script type="text/javascript"
                 src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/date-1.1.2/fc-4.0.2/fh-3.2.2/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.2/sl-1.3.4/datatables.min.js"></script>
+        <script type="text/javascript">$('#table-index').DataTable({"bPaginate": false})</script>
+
         {{--<script>
             $(function () {
                 $('#table-index').DataTable({

@@ -1,10 +1,11 @@
 @extends('master.master')
+@push('csspost')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+@endpush
 @section('main')
-    @section('css')
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    @endsection
     <h2>Post list</h2>
-    <table class="table" border="1px" width="100%">
+    <table class="table" id="table-post">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -12,16 +13,24 @@
             <th scope="col">Author</th>
             <th scope="col">Post Describe</th>
             <th scope="col">Post Images</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Del</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($posts as $post)
+        @foreach($posts as $apost)
             <tr>
-                <th scope="row">{{$post->id}}</th>
-                <td>{{$post->post_title}}</td>
-                <td>{{$post->post_author}}</td>
-                <td style="height: 100px">{{$post->post_desc}}</td>
-                <td><img width="100px" height="100 px" src="img/posts/{{$post->post_image_path}}" alt=""></td>
+                <th scope="row">{{$apost->id}}</th>
+                <td>{{$apost->post_title}}</td>
+                <td>{{$apost->post_author}}</td>
+                <td style="height: 100px">{{$apost->post_desc}}</td>
+                <td><img width="100px" height="100 px" src="img/posts/{{$apost->post_image_path}}" alt=""></td>
+                <td>
+                    <a class="btn btn-outline-primary" href="{{route('post.edit',$apost)}}">
+                        Edit
+                    </a>
+                </td>
+                <td><a class="btn btn-danger" href="{{route('post.destroy',$apost)}}">Delete</a></td>
             </tr>
         @endforeach
         </tbody>
@@ -29,7 +38,7 @@
     <!-- Button trigger modal -->
     <button href="route('user.create')" type="button" class="btn btn-primary" data-toggle="modal"
             data-target="#postModal">
-        Add new post
+        Add
     </button>
 
     <!-- Modal -->
@@ -38,7 +47,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="postModalTitle">Add new post</h5>
+                    <h5 class="modal-title" id="postModalTitle">Add a new post</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -67,7 +76,9 @@
                             <label for="post_image_path">Post Image</label>
                             <input type="file" name="post_image_path">
                         </div>
-                        <textarea name="content" class="form-control tinymce_editor_init"></textarea>
+                        <label>
+                            <textarea name="content" class="form-control tinymce_editor_init"></textarea>
+                        </label>
                         <button class="btn btn-primary">Save changes</button>
                         <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
                     </form>
@@ -80,9 +91,22 @@
             </div>
         </div>
     </div>
+@push('jspost')
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.11.5/dataRender/ellipsis.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $('#table-post').DataTable({
+            columnDefs: [ {
+                targets: 3,
+                render: function ( data, type, row ) {
+                    return data.substr( 0, 10 );
+                }
+            } ]
+        } );
+    </script>
+
+@endpush
 @endsection
 
-@section('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-@endsection
+
+

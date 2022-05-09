@@ -49,9 +49,10 @@ Route::get('/register',[RegisterController::class,'register'])->name('register')
 
     Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
         Route::get('', [PostController::class, 'index'])->name('index');
-        Route::get('create', [PostController::class, 'create'])->name('create');
         Route::post('store', [PostController::class, 'store'])->name('store');
-        //upload anh
+        Route::get('destroy/{post}', [PostController::class, 'destroy'])->name('destroy');
+        Route::get('edit/{post}', [PostController::class, 'edit'])->name('edit');
+        Route::post('update/{post}', [PostController::class, 'update'])->name('update');
     });
     Route::group(['prefix' => 'users', 'as' => 'user.'], function () {
 //For storing an image

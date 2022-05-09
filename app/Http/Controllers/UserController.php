@@ -131,21 +131,22 @@ class UserController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $user = User::find($id);
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileName = time() . "." . $fileExtension;
+            $file->move('img/avaUser', $fileName);
+        }
         $data = [
             'first_name' => isset($request->first_name)?$request->first_name:$user->first_name,
             'last_name' => isset($request->last_name)?$request->last_name:$user->last_name,
             'user_name' => isset($request->user_name)?$request->user_name:$user->user_name,
             'email' => isset($request->email)?$request->email:$user->email,
             'password' => bcrypt($request->password),
-
+            'avatar'=>isset($request->avatar)?$fileName:$user->avatar,
         ];
-        if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-            $fileExtension = $file->getClientOriginalExtension();
-            $fileName = time() . "." . $fileExtension;
-            $file->move('img/avaUser', $fileName);
-            $data=['avatar'=>$fileName];
-        }
+
+
         $user->update($data);
         return redirect()->route('user.index');
     }
